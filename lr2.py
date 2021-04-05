@@ -18,7 +18,7 @@ def paths(first_state, last_state, graph_of_paths, curr_path=None):
     return all_graph_paths
 
 
-def all_states_finder(graph_of_paths):
+def all_states_finder(graph_of_paths, all_paths_list):
     comb = []
     full_list_comb = []
     all_graph_system_states = []
@@ -30,7 +30,7 @@ def all_states_finder(graph_of_paths):
             full_list_comb.append(state)
 
     for list_comb in full_list_comb:
-        for path in all_paths:
+        for path in all_paths_list:
             if set(path).issubset(set(list_comb)):
                 all_graph_system_states.append(list_comb)
     return all_graph_system_states
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     all_paths = paths("start", "end", graph)
 
     # Знайдемо усі можливі стани системи
-    all_system_states = set(all_states_finder(graph))
+    all_system_states = set(all_states_finder(graph, all_paths))
 
     # Розрахуємо ймовірності для кожного стану
     string_of_all_states, all_states_probabilities = all_probs_calculator(graph, probabilities, all_system_states)
